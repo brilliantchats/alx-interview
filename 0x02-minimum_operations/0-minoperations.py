@@ -38,7 +38,7 @@ def minOperations(n):
     whose text editor only allows two operations - CopyAll and paste
     """
     if n <= 1:
-        return 0
+        return 1
     og_str = 'H'
     new_str = og_str + og_str  # Copy and paste the first round
     if len(new_str) == n:
