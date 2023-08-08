@@ -2,8 +2,6 @@
 """
 Minimum Operations
 """
-import sys
-sys.setrecursionlimit(10**6)
 
 
 def recurseOperations(op, counter, string, new_string, num):
@@ -39,8 +37,10 @@ def minOperations(n):
     Find the minimum operations to output n times 'H' in a file
     whose text editor only allows two operations - CopyAll and paste
     """
-    if type(n) is not int or n <= 1:
+    if type(n) is not int or n < 1:
         return 0
+    if n == 1:
+        return 1
     og_str = 'H'
     new_str = og_str + og_str  # Copy and paste the first round
     if len(new_str) == n:
