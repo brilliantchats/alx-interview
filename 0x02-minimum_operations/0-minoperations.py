@@ -37,7 +37,7 @@ def minOperations(n):
     Find the minimum operations to output n times 'H' in a file
     whose text editor only allows two operations - CopyAll and paste
     """
-    if type(n) is not int or n <= 1:
+    if type(n) is not int or n <= 1 or n > 999:
         return 0
     og_str = 'H'
     new_str = og_str + og_str  # Copy and paste the first round
