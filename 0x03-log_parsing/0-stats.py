@@ -12,12 +12,6 @@ def split_str(line):
     """
     arr = line.split()
     line_arr = list()
-    line_arr.append(arr[0])
-    line_arr.append(arr[1])
-    new_date = arr[2] + ' ' + arr[3]
-    line_arr.append(new_date)
-    new_http = arr[4] + ' ' + arr[5] + ' ' + arr[6]
-    line_arr.append(new_http)
     line_arr.append(arr[7])
     line_arr.append(arr[8])
     return line_arr
@@ -30,30 +24,12 @@ def validate(line):
     status_codes = {200: 200, 301: 301, 400: 400, 401: 401,
                     403: 403, 404: 404, 405: 405, 500: 500}
     line_arr = split_str(line)
-    ip_address = line_arr[0].split('.')
-    for num in ip_address:
-        if not num.isdigit():
-            return False
-    if line_arr[1] != '-':
-        return False
-    if line_arr[2][0] == '[' and line_arr[2][-1] == ']':
-        date = line_arr[2].strip('[]')
-        try:
-            parse(date, fuzzy=False)
-        except ValueError:
-            return False
-    else:
-        return False
-    if line_arr[3] != '"GET /projects/260 HTTP/1.1"':
-        return False
-    if line_arr[4].isdigit():
-        status = int(line_arr[4])
+    if line_arr[0].isdigit():
+        status = int(line_arr[0])
         if status not in status_codes:
             return False
     else:
-        return False
-    if not line_arr[5].isdigit():
-        return False
+        return Fals
     return True
 
 
@@ -82,8 +58,8 @@ def compute_metrics():
             line = line.rstrip('\n')
             if (validate(line)):
                 arr = split_str(line)
-                status = int(arr[4])
-                size = int(arr[5])
+                status = int(arr[0])
+                size = int(arr[1])
                 if status in file_list:
                     file_list[status] = size + file_list.get(status)
                     status_list[status] = status_list.get(status) + 1
@@ -101,10 +77,9 @@ def compute_metrics():
                     file_list = {}
                     i = 0
                 i += 1
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt):
         print_files(file_list, status_list, file_size)
         raise
 
 
-if __name__ == '__main__':
-    compute_metrics()
+compute_metrics()
