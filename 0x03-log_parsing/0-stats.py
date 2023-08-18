@@ -3,6 +3,7 @@
 Reads stdin line by line and prints some stats
 """
 import sys
+import re
 
 
 def print_files(size, statuses):
@@ -20,9 +21,13 @@ status_codes = {200: 200, 301: 301, 400: 400, 401: 401,
 status_list = dict()
 try:
     for line in sys.stdin:
+        regex1 = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[.+\] '
+        regex2 = r'"GET /projects/260 HTTP/1.1" \S+ \S+'
+        regex = regex1 + regex2
         line = line.rstrip('\n')
+        match = re.match(regex, line)
         line_arr = line.split()
-        if len(line_arr) != 0:
+        if match:
             file_size += int(line_arr[-1])
             status_str = line_arr[-2]
             if status_str.isdigit():
