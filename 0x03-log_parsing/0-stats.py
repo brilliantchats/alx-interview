@@ -4,7 +4,6 @@ Reads stdin line by line and prints some stats
 """
 import sys
 from dateutil.parser import parse
-import re
 
 
 def split_str(line):
@@ -107,5 +106,4 @@ def compute_metrics():
         raise
 
 
-if __name__ == '__main__':
-    compute_metrics()
+compute_metrics()
