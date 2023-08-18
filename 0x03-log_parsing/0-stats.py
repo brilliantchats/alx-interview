@@ -35,7 +35,7 @@ try:
                 if status in status_codes:
                     current_status = status_list.get(status, 0)
                     status_list[status] = current_status + 1
-        i += 1
+            i += 1
         if i == 10:
             print_files(file_size, status_list)
             i = 0
