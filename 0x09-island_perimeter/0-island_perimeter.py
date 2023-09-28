@@ -9,6 +9,7 @@ def island_perimeter(grid):
     perimeter = 0
     row = len(grid)
     col = len(grid[0])
+    assert (1 <= row and col <= 100), "Check conditions of size of grid"
     for i in range(row):
         for j in range(col):
             if grid[i][j] == 1:
